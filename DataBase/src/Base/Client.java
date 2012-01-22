@@ -58,7 +58,7 @@ public class Client {
 	movie.add(movies);
 	}
 
-	public void CzyscGry()
+	public void CleanGame()
 	{
 	movie.clear();
 	}
@@ -117,7 +117,7 @@ public class Client {
 	music.add(music1);
 	}
 
-	public void CzyscMusic()
+	public void CleanMusic()
 	{
 	music.clear();
 	}
@@ -210,7 +210,7 @@ public class Client {
 	game.remove(FindGame(removegame1));
 	}
 
-	public void Editgame(int position, String newtitle, String newplatform) {
+	public void EditGame(int position, String newtitle, String newplatform) {
 	int w=FindGame(position);
 	game.get(w).Title=newtitle;
 	game.get(w).Platform=newplatform;

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="metody" default="test_user">
+
+
+<property name="bin" location="bin">
+</property>
+<property name="dist" location="dist">
+</property>
+<property name="src" location="src">
+</property>
+<property name="testout" location="testout">
+</property>
+
+<path id="metody.classpath">
+<pathelement location="bin"/>
+<pathelement location="Library/junit-4.10.jar"/>
+</path>
+
+<target name="init">
+<tstamp />
+<mkdir dir="${bin}" />
+<mkdir dir="${dist}" />
+<mkdir dir="${testout}" />
+
+</target>
+
+
+<target name="compile" depends="init">
+<javac srcdir="${src}" destdir="${bin}" includeantruntime="false">
+</javac>
+</target>
+
+
+
+<target name="jar" depends="compile">
+<jar destfile="dist/metody-${DSTAMP}.jar" basedir="${bin}">
+</jar>
+</target>
+
+<target name="run" depends="compile" description="Progam Start">
+<java classname="DataBase.Test" failonerror="true" fork="yes">
+<classpath refid="metody.classpath"/>
+</java>
+</target>
+
+<target name="test_object" depends="compile">
+<junit fork="no" >
+<formatter type="xml"/>
+<test name="Test.GameTest" todir="${testout}"/>
+<test name="Test.MusicTest" todir="${testout}"/>
+<test name="Test.MovieTest" todir="${testout}"/>
+<classpath refid="metody.classpath"/>
+</junit>
+</target>
+
+<target name="test_user" depends="test_object">
+<junit fork="no" >
+<formatter type="xml"/>
+<test name="Test.UserTest" todir="${testout}"/>
+<classpath refid="metody.classpath"/>
+</junit>
+</target>
+
+<target name="clean">
+<delete dir="${bin}">
+</delete>
+<delete dir="${dist}">
+</delete>
+
+</target>
+</project>
+
+
