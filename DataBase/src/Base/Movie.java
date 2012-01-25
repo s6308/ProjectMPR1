@@ -27,6 +27,13 @@ public class Movie {
 	{
 	return Title;
 	}
+
+	public void setTitle(String title) 
+	{
+		Title = title;
+	}
 	
+	
+
 }
 

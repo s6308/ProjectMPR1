@@ -3,26 +3,104 @@ package Base;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Client {
 
-	String Name,Surname;
-	int Phone, Mobile;
+	private String Name,Surname;
+	private int Phone, Mobile;
+	private List<Movie> movies = new ArrayList<Movie>();
+	private List<Music> musics = new ArrayList<Music>();
+	private List<Game> games = new ArrayList<Game>();
 
-	public List<Movie> movie = new ArrayList<Movie>();
-	public List<Music> music = new ArrayList<Music>();
-	public List<Game> game = new ArrayList<Game>();
-
-	Client(String name, String surname, int phone, int mobile)
+	public Client(String name, String surname, int phone, int mobile)
 	{
 	this.Name=name;
 	this.Surname=surname;
 	this.Phone=phone;
 	this.Mobile=mobile;
-	this.movie=new ArrayList<Movie>();
-	this.music=new ArrayList<Music>();
-	this.game=new ArrayList<Game>();
 	}
 	
+	public Client(String name, String surname, int phone, int mobile, List<Movie> movies, List<Music> musics, List<Game> games)
+	{
+	this.Name=name;
+	this.Surname=surname;
+	this.Phone=phone;
+	this.Mobile=mobile;
+	this.movies=new ArrayList<Movie>();
+	this.musics=new ArrayList<Music>();
+	this.games=new ArrayList<Game>();
+	}
+	
+	public String getName()
+	{
+		return Name;
+	}
+	
+	public void setName(String name)
+	{
+		Name = name;
+	}
+	
+	public String getSurname()
+	{
+		return Surname;
+	}
+
+	public void setSurname(String surname)
+	{
+		Surname = surname;
+	}
+
+	public int getPhone()
+	{
+		return Phone;
+	}
+
+	public void setPhone(int phone)
+	{
+		Phone = phone;
+	}
+
+	public int getMobile()
+	{
+		return Mobile;
+	}
+
+	public void setMobile(int mobile)
+	{
+		Mobile = mobile;
+	}
+
+	public List<Movie> getMovie()
+	{
+		return movies;
+	}
+
+	public void setMovie(List<Movie> movie)
+	{
+		this.movies = movie;
+	}
+
+	public List<Music> getMusic()
+	{
+		return musics;
+	}
+
+	public void setMusic(List<Music> music)
+	{
+		this.musics = music;
+	}
+
+	public List<Game> getGame()
+	{
+		return games;
+	}
+
+	public void setGame(List<Game> game)
+	{
+		this.games = game;
+	}
+
 	public void ViewClient()
 	{
 	System.out.println("Dane Klienta: ");
@@ -32,194 +110,191 @@ public class Client {
 
 	public void ViewMovie()
 	{
-	for(Movie a : movie)
+	for(Movie a : movies)
 	a.ViewMovie();
 	System.out.println("");
 	}
 	
 	public void ViewMusic()
 	{
-	for(Music b : music)
+	for(Music b : musics)
 	b.ViewMusic();
 	System.out.println("");
 	}
 
 	public void ViewGame()
 	{
-	for(Game c : game)
+	for(Game c : games)
 	c.ViewGame();
 	System.out.println("");
 	}
 
 	/**Movie**/
 	
-	public void AddMovie(Movie movies)
+	public void AddMovie(String title)
 	{
-	movie.add(movies);
+	movies.add(new Movie(title));
 	}
 
-	public void CleanGame()
+	public void CleanMovie()
 	{
-	movie.clear();
+	movies.clear();
 	}
 
-	int FindMovie(String title)
+	public Movie FindMovie(String title)
 	{
-	int a=0;
-	for(Movie movie1 : movie)
-	if(movie1.getTitle()==title)
+	for(Movie movie1 : movies)
+		if(movie1.getTitle()==title)
 		{
-		a=movie.indexOf(movie1);
-		break;
+		return movie1;
 		}
-	return a;
+		return null;		
 	}
 
-	int FindMovie(int findid)
+	public int FindMovie(int findid)
 	{
 	int b=0;
-	for(Movie movie2 : movie)
-	if(movie2.getMovieId()==findid)
-		{
-		b=movie.indexOf(movie2);
-		break;
-		}
-	return b;
+	for(Movie movie2 : movies)
+		if(movie2.getMovieId()==findid)
+			{
+			b=movies.indexOf(movie2);
+			break;
+			}
+		return b;
 	}
 
 	public void RemoveMovie(String titler)
 	{
-	movie.remove(FindMovie(titler));
+	movies.remove(FindMovie(titler));
 	}
 
 	public void RemoveMovie(int c)
 	{
-	movie.remove(FindMovie(c));
+	movies.remove(FindMovie(c));
 	}
 
-	public void EditMovie(int keyid, String newtitle)
+	public void EditMovie(Movie movie1, String newtitle)
 	{
-	int d=FindMovie(keyid);
-	movie.get(d).Title=newtitle;
+		int number = 0;
+		for(Movie  movie : movies)
+		{
+			if(movie.getTitle()==movie1.getTitle())
+			{
+				movies.set(number, new Movie(newtitle));
+			}
+		}
 	}
-
-	public void EditMovie(String movietitle, String newtitle)
-	{
-	int d=FindMovie(movietitle);
-	movie.get(d).Title=newtitle;
-	}
-
 
 	/**Music**/
 
-	public void AddMusic(Music music1)
+	public void AddMusic(String author, String title)
 	{
-	music.add(music1);
+	musics.add(new Music(author, title));
 	}
 
 	public void CleanMusic()
 	{
-	music.clear();
+	musics.clear();
 	}
 
-	int FindMusic(int findid)
+	public int FindMusic(int findid)
 	{
 	int a=0;
-	for(Music music1 : music)
+	for(Music music1 : musics)
 	if(music1.getMusicId()==findid)
 		{
-		a=music.indexOf(music);
+		a=musics.indexOf(music1);
 		break;
 		}
 	return a;
 	}
 
-	int FindMusic(String musictitle)
+	public Music FindMusic(String title)
 	{
-	int b =0;
-	for (Music music2 : music)
-	if(music2.getTitle()==musictitle)
+	for(Music music1 : musics)
+		if(music1.getTitle()==title)
 		{
-		b=music.indexOf(music2);
-		break;
+		return music1;
 		}
-	return b;
+		return null;		
 	}
 
 	public void RemoveMusic(int j)
 	{
-	music.remove(FindMusic(j));
+	musics.remove(FindMusic(j));
 	}
 
-	public void RemoveMusic (String album)
+	public void RemoveMusic (String title)
 	{
-	music.remove(FindMusic(album));
+	musics.remove(FindMusic(title));
 	}
 
-	public void EditMusic(int keyid, String newauthor, String newtitle)
+	public void EditMusic(Music music1, String newauthor)
 	{
-	int c=FindMusic(keyid);
-	music.get(c).Author=newauthor;
-	music.get(c).Title=newtitle;
-	}
-
-	public void EditMusic(String title, String newauthor, String newtitle)
-	{
-	int d=FindMusic(title);
-	music.get(d).Author=newauthor;
-	music.get(d).Title=newtitle;
+		int number = 0;
+		for(Music  music : musics)
+		{
+			if(music.getTitle()==music1.getTitle())
+			{
+			musics.set(number, new Music(newauthor, music1.getTitle()));
+			}
+		}
 	}
 
 	/**Game**/
 	
-	public void AddGame(Game game1)
+	public void AddGame(String title, String platform)
 	{
-	game.add(game1);
+	games.add(new Game(title, platform));
 	}
 
 	public void ClearGame()
 	{
-	game.clear();
+	games.clear();
 	}
 
-	int FindGame(int l)
+	public int FindGame(int l)
 	{
 	int a=0;
-	for(Game game1 : game)
-	if(game1.getGameId()==l){
-	a=game.indexOf(game1);
-	}
+	for(Game game1 : games)
+		if(game1.getGameId()==l)
+		{
+		a=games.indexOf(game1);
+		}
 	return a;
 	}
 
-	int FindGame (String findgame){
-	int b = 0;
-	for(Game game2 : game)
-	if(game2.getTitle()==findgame){
-	b=game.indexOf(findgame);
-	}
-	return b;
-	}
-
-	public void RemoveGame(int removegame) {
-	game.remove(FindGame(removegame));
-
-	}
-	public void RemoveGame(String removegame1)
+	public Game FindGame(String title)
 	{
-	game.remove(FindGame(removegame1));
+	for(Game game1 : games)
+		if(game1.getTitle()==title)
+		{
+		return game1;
+		}
+		return null;		
+	}
+	
+	public void RemoveGame(int g)
+	{
+	games.remove(FindGame(g));
+	}
+	
+	public void RemoveGame(String title)
+	{
+	games.remove(FindGame(title));
 	}
 
-	public void EditGame(int position, String newtitle, String newplatform) {
-	int w=FindGame(position);
-	game.get(w).Title=newtitle;
-	game.get(w).Platform=newplatform;
-	}
 
-	public void EditGame(String gamename, String newtitle, String newplatform ){
-	int w=FindGame(gamename);
-	game.get(w).Title=newtitle;
-	game.get(w).Platform=newplatform;
+	public void EditGame(Game game1, String newtitle)
+	{
+		int number = 0;
+		for(Game  game : games)
+		{
+			if(game.getTitle()==game1.getTitle())
+			{
+				games.set(number, new Game(newtitle, game1.getPlatform()));
+			}
+		}
 	}
 
 }

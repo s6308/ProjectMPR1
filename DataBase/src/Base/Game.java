@@ -7,11 +7,6 @@ public class Game {
 	private int GameId;
 	String Title, Platform;
 	 
-	public String getTitle()
-	{
-	return Title;
-	}
-
 	public Game(String title, String platform)
 	{
 	this.Title=title;
@@ -28,6 +23,30 @@ public class Game {
 	{
 	return GameId;
 	}
+	
+	public String getTitle()
+	{
+	return Title;
+	}
+	
+	public String getPlatform() 
+	{
+	return Platform;
+	}
+
+	public void setGameId(int gameId) {
+		GameId = gameId;
+	}
+
+	public void setTitle(String title) {
+		Title = title;
+	}
+
+	public void setPlatform(String platform) {
+		Platform = platform;
+	}
+	
+	
 
 }
 

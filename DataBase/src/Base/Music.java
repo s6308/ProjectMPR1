@@ -28,5 +28,20 @@ public class Music {
 	{
 	return Title;
 	}
+	
+	public String getAuthor()
+	{
+	return Author;
+	}
+
+	public void setAuthor(String author) {
+		Author = author;
+	}
+
+	public void setTitle(String title) {
+		Title = title;
+	}
+	
+	
 
 }
