@@ -1,5 +1,9 @@
 package Base;
 
+import Services.ClientDBMeneger;
+import Services.MusicDBMeneger;
+
+
 public class Main {
 	
 
@@ -51,6 +55,25 @@ public class Main {
 	client1.ViewMovie();
 	client1.ViewMusic();
 	client1.ViewGame();
+	
+	System.out.println("---------DB----------");
+	
+	ClientDBMeneger ClientDB= new ClientDBMeneger();
+	MusicDBMeneger  MusicDB = new MusicDBMeneger ();
+	
+	MusicDB.RemoveAllMusic();
+	ClientDB.RemoveAllClients();
+	
+	ClientDB.AddClient(new Client("Alojzy","Raman",111222333,100200300));
+	ClientDB.AddClient(new Client("Jacek","Ryan",444555666,400500600));
+	
+	Music s1 = new Music("Kult", "Spokojnie");
+	MusicDB.AddMusic(s1, ClientDB.FindClient("Raman"));
+	Music s2 = new Music("Metallica", "Reload");
+	MusicDB.AddMusic(s2, ClientDB.FindClient("Ryan"));
+	Music s3 = new Music("AC/DC", "T.N.T.");
+	MusicDB.AddMusic(s3, ClientDB.FindClient("Ryan"));
 	}
 
-	}
+
+}
